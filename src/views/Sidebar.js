@@ -82,17 +82,17 @@ class Sidebar {
   bindCheckbox = (selector, start = false, stop = false) => {
     document.querySelector(selector).onclick = (e) => {
       e.preventDefault();
-      
+
       const isOn = document.querySelector(".l17p5q9z").innerHTML;
       console.log(isOn);
       // toggleCheckbox(selector);
-      if (isOn == "Start") {
-        document.querySelector(".l17p5q9z").innerHTML = 'Stop';
-        document.getElementById("messageBtn").click();
+      if (isOn === 'Start') {
+        document.getElementById('messageBtn').click();
+        document.querySelector('.l17p5q9z').innerHTML = 'Stop';
         start();
       } else {
         stop();
-        document.querySelector(".l17p5q9z").innerHTML = 'Start';
+        document.querySelector('.l17p5q9z').innerHTML = 'Start';
       }
     };
   };
