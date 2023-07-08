@@ -8,15 +8,12 @@
     "128": "icons/icon128.png"
   },
   "description": "Introducing 🎉 InstaMatch 🎉, your ultimate matchmaker! 😍💘",
-  "manifest_version": 2,
+  "manifest_version": 3,
   "update_url": "https://clients2.google.com/service/update2/crx",
   "version": "3.0.0",
   "author": "Geczy",
   "background": {
-    "scripts": [
-      "bg.js"
-    ],
-    "persistent": false
+    "service_worker": "bg.js"
   },
   "content_scripts": [
     {
@@ -26,6 +23,7 @@
       "matches": [
         "https://tinder.com/*",
         "https://instagram.com/*",
+        "https://www.instagram.com/*",
         "https://*.gotinder.com/*"
       ]
     }

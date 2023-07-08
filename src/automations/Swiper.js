@@ -49,21 +49,37 @@ class Swiper {
     return true;
   };
 
-  matchFound = () => {
-    const found = document.querySelectorAll('button[aria-label="Close"]');
+  matchFound = async () => {
+    const response = await getMatches(true, true);
+    const isSuccess = response?.meta?.status === 200;
 
-    if (typeof found?.click !== 'function') {
+    if (isSuccess && response.data.matches.length) {
+      response.data.matches.forEach((match) => {
+        const messageToSend = get(document.getElementById('messageToSend'), 'value', '').replace(
+          '{name}',
+          get(match, 'person.name').toLowerCase()
+        );
+
+        sendMessageToMatch(match.id, { message: messageToSend }).then((b) => {
+          if (get(b, 'sent_date')) {
+            logger(`Message sent to ${get(match, 'person.name')}`);
+          } else {
+            logger(`Message NOT sent to ${get(match, 'person.name')}`);
+          }
+        });
+      });
+    } else {
       return false;
     }
 
     document.getElementById('matchCount').innerHTML =
       parseInt(document.getElementById('matchCount').innerHTML, 10) + 1;
     logger("Congrats! We've got a match! 🤡");
-    found.click();
+
     return true;
   };
 
-  run = () => {
+  run = async () => {
     if (!this.isRunning) {
       return;
     }
@@ -103,7 +119,7 @@ class Swiper {
     }
 
     // Keep Swiping
-    if (this.matchFound()) {
+    if (await this.matchFound()) {
       setTimeout(this.run, generateRandomNumber(500, 900));
       return;
     }
