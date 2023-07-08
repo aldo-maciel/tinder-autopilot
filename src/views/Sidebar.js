@@ -4,7 +4,7 @@ import {
   topBanner,
   autopilot,
   infoBanner,
-  massMessage, 
+  massMessage,
   loggerHeader,
   counterLogs,
   offToggleInner,
@@ -18,15 +18,17 @@ import { waitUntilElementExists } from '../misc/helper';
 
 class Sidebar {
   constructor() {
-    this.sidebar();
-    // console.log("constructor: ", document.querySelector('aside:first-of-type'));
+    setTimeout(() => {
+      this.sidebar();
+      // console.log("constructor: ", document.querySelector('aside:first-of-type'));
 
-    this.anonymous = new Anonymous();
-    this.hideUnanswered = new HideUnanswered();
-    this.swiper = new Swiper();
-    this.messenger = new Messenger();
+      this.anonymous = new Anonymous();
+      this.hideUnanswered = new HideUnanswered();
+      this.swiper = new Swiper();
+      this.messenger = new Messenger();
 
-    this.events();
+      this.events();
+    }, 4000);
   }
 
   insertBefore = (el, referenceNode) => {
@@ -39,7 +41,7 @@ class Sidebar {
     el.style.cssText = 'background-color:#1f2937;z-index:9999999;';
     el.innerHTML = infoBanner;
     // console.log("this: ", document.querySelector('aside:first-of-type'));
-    this.insertBefore(el, document.querySelector('aside:first-of-type'));
+    this.insertBefore(el, document.querySelector('aside:first-of-type') || document.querySelector('div[tabindex="-1"]').querySelector('div[style="transform: translateX(0px);"]'));
 
     this.infoBanner = document.querySelector('#infoBanner');
 
@@ -76,13 +78,13 @@ class Sidebar {
         localStorage.setItem('TinderAutopilot/MessengerDefault' + i, JSON.stringify(e.target.value));
       });
     }
-    
+
   };
 
   bindCheckbox = (selector, start = false, stop = false) => {
     document.querySelector(selector).onclick = (e) => {
       e.preventDefault();
-      
+
       const isOn = document.querySelector(".l17p5q9z").innerHTML;
       console.log(isOn);
       // toggleCheckbox(selector);

@@ -16,7 +16,9 @@ const logger = (v) => {
     -2
   )}:${`0${now.getSeconds()}`.slice(-2)}.</span>
   ${v}</span></p>`;
-  txt.innerHTML = message + txt.innerHTML;
+  if (txt) {
+    txt.innerHTML = message + txt.innerHTML;
+  }
 };
 
 const waitUntilElementExists = (selector, callback) => {

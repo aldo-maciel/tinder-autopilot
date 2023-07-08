@@ -34,7 +34,11 @@ class Swiper {
       XPathResult.FIRST_ORDERED_NODE_TYPE,
       null
     ).singleNodeValue;
-    return matchingElement.closest('button');
+
+    if (matchingElement) {
+      return matchingElement.closest('button');
+    }
+    return false;
   };
 
   pressLike = () => {
