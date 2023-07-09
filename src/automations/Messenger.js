@@ -64,10 +64,12 @@ class Messenger {
       if (!this.isRunningMessage) break;
 
       const match = matchList[matchID];
-      const messageToSend = get(document.getElementById('messageToSend'), 'value', '').replace(
-        '{name}',
-        get(match, 'person.name').toLowerCase()
-      );
+      const randomMessageNumber = Math.floor(Math.random() * 10) + 1;
+      const messageToSend = get(
+        document.getElementById(`messageToSend${randomMessageNumber}`),
+        'value',
+        ''
+      ).replace('{name}', get(match, 'person.name').toLowerCase());
 
       const messageToSendL = messageToSend
         .trim()
