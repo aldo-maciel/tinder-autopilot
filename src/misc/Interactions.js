@@ -58,7 +58,7 @@ class Interactions {
     try {
       const modal = document.querySelector('[role="dialog"]').parentElement.parentElement;
       if (modal) {
-        document.querySelector('[role="dialog"]').parentElement.click();
+        document.querySelector('[role="dialog"]').querySelector('button[class~="close"]').click();
         logger('Closing modal');
         return true;
       }

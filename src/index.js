@@ -1,3 +1,5 @@
+import './style/style.scss';
+import './style/app.scss';
 import get from 'lodash/get';
 import { logger } from './misc/helper';
 import Sidebar from './views/Sidebar';

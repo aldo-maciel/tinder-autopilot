@@ -50,9 +50,8 @@ const fetchResource = (url, body = false) => {
 };
 
 const getMatches = async (newOnly, nextPageToken) => {
-  console.log("newOnly: ", newOnly);
   return fetchResource(
-    `https://api.gotinder.com/v2/matches?count=100&is_tinder_u=true&locale=en&message=${
+    `https://api.gotinder.com/v2/matches?count=100&is_tinder_u=true&message=${
       newOnly ? 0 : 1
     }${typeof nextPageToken === 'string' ? `&page_token=${nextPageToken}` : ''}`
   );

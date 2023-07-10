@@ -20,10 +20,14 @@
       "js": [
         "main.js"
       ],
+      "css": [
+        "main.css"
+      ],
       "matches": [
         "https://tinder.com/*",
         "https://instagram.com/*",
         "https://www.instagram.com/*",
+        "https://www.instagram.com/*/",
         "https://*.gotinder.com/*"
       ]
     }

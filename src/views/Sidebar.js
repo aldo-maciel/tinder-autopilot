@@ -1,15 +1,4 @@
-import {
-  onToggle,
-  offToggle,
-  topBanner,
-  autopilot,
-  infoBanner,
-  massMessage,
-  loggerHeader,
-  counterLogs,
-  offToggleInner,
-  onToggleInner
-} from './templates';
+import { autopilot, counterLogs, infoBanner, loggerHeader, massMessage, topBanner } from './templates';
 import Messenger from '../automations/Messenger';
 import Swiper from '../automations/Swiper';
 import HideUnanswered from '../automations/HideUnanswered';
@@ -28,7 +17,7 @@ class Sidebar {
       this.messenger = new Messenger();
 
       this.events();
-    }, 4000);
+    }, 6000);
   }
 
   insertBefore = (el, referenceNode) => {
@@ -37,20 +26,26 @@ class Sidebar {
 
   sidebar = () => {
     const el = document.createElement('aside');
-    el.className = 'H(100%) Fld(c) Pos(r) Flxg(0) Fxs(0) Flxb(25%) Miw(325px) Maw(375px)';
-    el.style.cssText = 'background-color:#1f2937;z-index:9999999;';
+    el.className = 'auto-pilot sidebar';
     el.innerHTML = infoBanner;
     // console.log("this: ", document.querySelector('aside:first-of-type'));
-    this.insertBefore(el, document.querySelector('aside:first-of-type') || document.querySelector('div[tabindex="-1"]').querySelector('div[style="transform: translateX(0px);"]'));
+    this.insertBefore(
+      el,
+      document.querySelector('aside:first-of-type') ||
+        document
+          .querySelector('div[tabindex="-1"]')
+          .querySelector('div[style="transform: translateX(0px);"]')
+    );
 
     this.infoBanner = document.querySelector('#infoBanner');
 
-    this.infoBanner.innerHTML =
-      `<nav class="Pos(r)  H(100%) gamepad-control-off">
-          <div class="H(100%)"><div class="Ov(h) Bgc($c-bg-lite-blue) menu Pos(r) H(100%)">
-          <div class="menu__content Bgc(#c1e6f9) Pb(50px) Fz($responsiveLarge)--m H(100%) Ovs(touch) Ovx(h) Ovy(s) Ovsby(n)">${topBanner}${counterLogs(0,0)}
-          ${autopilot}${massMessage}${loggerHeader}<div class="txt" style="overflow-y: auto; height: 100%;"></div>` +
-      `</div></div></div></nav>`;
+    this.infoBanner.innerHTML = `<nav class='Pos(r)  H(100%) gamepad-control-off'>
+          <div class='H(100%)'><div class='Ov(h) Bgc($c-bg-lite-blue) menu Pos(r) H(100%)'>
+          <div class='menu__content Bgc(#c1e6f9) Pb(50px) Fz($responsiveLarge)--m H(100%) Ovs(touch) Ovx(h) Ovy(s) Ovsby(n)'>${topBanner}${counterLogs(
+      0,
+      0
+    )}
+          ${autopilot}${massMessage}${loggerHeader}<div class="txt max-h-60" style="overflow-y: auto; height: auto;"></div></div></div></div></nav>`;
   };
 
   events = () => {
@@ -74,27 +69,29 @@ class Sidebar {
     //   this.hideUnanswered.stop
     // );
     for (let i = 1; i <= 10; i++) {
-      document.getElementById('messageToSend' + i).addEventListener('blur', (e) => {
-        localStorage.setItem('TinderAutopilot/MessengerDefault' + i, JSON.stringify(e.target.value));
+      document.getElementById(`messageToSend${i}`).addEventListener('blur', (e) => {
+        localStorage.setItem(
+          `TinderAutopilot/MessengerDefault${i}`,
+          JSON.stringify(e.target.value)
+        );
       });
     }
-
   };
 
   bindCheckbox = (selector, start = false, stop = false) => {
     document.querySelector(selector).onclick = (e) => {
       e.preventDefault();
 
-      const isOn = document.querySelector(".l17p5q9z").innerHTML;
+      const isOn = document.querySelector('.start-btn').innerHTML;
       console.log(isOn);
       // toggleCheckbox(selector);
-      if (isOn == "Start") {
-        document.querySelector(".l17p5q9z").innerHTML = 'Stop';
-        document.getElementById("messageBtn").click();
+      if (isOn === 'Start') {
+        document.getElementById('messageBtn').click();
+        document.querySelector('.start-btn').innerHTML = 'Stop';
         start();
       } else {
         stop();
-        document.querySelector(".l17p5q9z").innerHTML = 'Start';
+        document.querySelector('.start-btn').innerHTML = 'Start';
       }
     };
   };
@@ -102,7 +99,7 @@ class Sidebar {
 
 const getCheckboxValue = (selector) =>
   // document.querySelector(`${selector} .toggleSwitch > div`).className === onToggle;
-  console.log("success");
+  console.log('success');
 
 const toggleCheckbox = (selector) => {
   // const isOn = getCheckboxValue(selector);

@@ -1,5 +1,7 @@
-import { logger, generateRandomNumber } from '../misc/helper';
+import { generateRandomNumber, logger } from '../misc/helper';
 import Interactions from '../misc/Interactions';
+import { getMatches, sendMessageToMatch } from '../misc/api';
+import get from 'lodash/get';
 
 class Swiper {
   selector = '.tinderAutopilot';
@@ -59,10 +61,12 @@ class Swiper {
 
     if (isSuccess && response.data.matches.length) {
       response.data.matches.forEach((match) => {
-        const messageToSend = get(document.getElementById('messageToSend'), 'value', '').replace(
-          '{name}',
-          get(match, 'person.name').toLowerCase()
-        );
+        const randomMessageNumber = Math.floor(Math.random() * 10) + 1;
+        const messageToSend = get(
+          document.getElementById(`messageToSend${randomMessageNumber}`),
+          'value',
+          ''
+        ).replace('{name}', get(match, 'person.name').toLowerCase());
 
         sendMessageToMatch(match.id, { message: messageToSend }).then((b) => {
           if (get(b, 'sent_date')) {

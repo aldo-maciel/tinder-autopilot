@@ -18,7 +18,7 @@ class Messenger {
   checkedMessage = 0;
 
   loopMatches = async () => {
-    const response = await getMatches(getCheckboxValue(this.newSelector), this.nextPageToken);
+    const response = await getMatches(true, this.nextPageToken);
     this.nextPageToken = get(response, 'data.next_page_token');
     this.allMatches.push.apply(this.allMatches, get(response, 'data.matches', []));
   };

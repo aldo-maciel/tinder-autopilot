@@ -1,0 +1,12 @@
+.auto-pilot {
+  font-size: 16px;
+  overflow: auto;
+}
+
+.auto-pilot.sidebar {
+  @apply h-full relative weight-1 w-px350 max-w-px390 bg-primary z-50;
+}
+
+.auto-pilot .start-btn {
+  @apply w-4/12 bg-gradient-start-btn rounded-3xl px-5 py-3 text-center cursor-pointer absolute bottom-2;
+}
